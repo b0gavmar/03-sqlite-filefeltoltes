@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/images.css">
+  <title>Image Upload</title>
+</head>
+<body>
+  <main>
+  <h1>File Upload</h1>
+  <form class="form-control" action="/upload" method="post" enctype="multipart/form-data">
+    <input id="file-upload" type="file" name="image" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Uploaded images</h2>
+    <hr/>
+    <% if (images.length > 0) { %>
+      <div class="grid">
+        <% for (let image of images) { %>
+          <article class="card product-item">
+            <div class="card__image">
+              <img src="/images/<%= image.filename %>" alt="Image: <%= image.filename %>" width="200">
+            </div>
+            <div class="card__actions row-end">
+              <form action="/delete/<%= image.id %>" method="post" style="display:inline;">
+                <button class="icon-button" type="submit">🗑️</button>
+              </form>
+            </div>
+          </article>
+        <% } %>
+      </div>
+    <% } else { %>
+      <h2>No picture</h2>
+    <% } %>
+  </main>
+</body>
+</html>
